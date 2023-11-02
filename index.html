@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table.GeneratedTable {
+            width: 100%;
+            background-color: #930123;
+            border-collapse: collapse;
+            border-width: 2px;
+            border-color: #000000;
+            border-style: solid;
+            color: #ffffff;
+        }
+
+        table.GeneratedTable td, table.GeneratedTable th {
+            border-width: 2px;
+            border-color: #ffffff;
+            border-style: solid;
+            padding: 3px;
+        }
+
+        table.GeneratedTable thead {
+            background-color: #000000;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #ffffff;
+        }
+
+        .button1:hover {
+            background-color: #930123;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <title>SHP Times</title>
+</head>
+
+<body style="background-color: black">
+
+<em><p style="font-family: Verdana; color: white;font-size: small">Note, times may change slightly and dosent show after school times beause the times are not set</p></em>
+
+<h1 style="font-family:verdana;color: #930123">SHP Times</h1>
+
+<p style="color: white">The cafe is...</p>
+
+<div id="statusMessage" style="color: #930123;font-family:verdana;font-size: xx-large;font-weight: bolder"></div>
+
+<script>
+    function checkStatus() {
+        var currentTime = new Date();
+        var currentHour = currentTime.getUTCHours() - 7; // make pst
+        var currentDay = currentTime.getUTCDay();
+
+        // nor times
+        var openingHours = [
+            { start: 8, end: 8, minuteStart: 0, minuteEnd: 25 },
+            { start: 9, end: 9, minuteStart: 25, minuteEnd: 50 },
+            { start: 12, end: 12, minuteStart: 5, minuteEnd: 55 }
+        ];
+        //wed times
+        if (currentDay === 3) {
+            openingHours = [
+                { start: 9, end: 9, minuteStart: 0, minuteEnd: 25 },
+                { start: 11, end: 12, minuteStart: 35, minuteEnd: 25 }
+            ];
+        }
+
+        var isOpen = openingHours.some(function (timeRange) {
+            return (
+                currentHour == timeRange.start &&
+                currentTime.getUTCMinutes() >= timeRange.minuteStart &&
+                (currentHour < timeRange.end || (currentHour == timeRange.end && currentTime.getUTCMinutes() <= timeRange.minuteEnd))
+            );
+        });
+
+        // disp status message
+        var statusMessage = document.getElementById("statusMessage");
+        if (isOpen) {
+            statusMessage.textContent = "Open";
+        } else {
+            statusMessage.textContent = "Closed";
+        }
+    }
+
+    checkStatus();
+
+    setInterval(checkStatus, 60000);
+</script>
+
+<button onclick="bellsfun()" class="button button1" style="font-family: Verdana">Bell Schedule</button>
+<script>
+    function bellsfun() {
+        var x = document.getElementById("bells");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
+<div id="bells" class="hidden">
+    <iframe src="http://cs.shschools.org/" width="65%" height="450" style="border:1px solid black;">
+    </iframe>
+</div>
+
+<button onclick="myFunction()" class="button button1" style="font-family: Verdana">Cafe Times</button>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
+<div id="myDIV" class="hidden">
+    <table class="GeneratedTable">
+        <thead>
+        <tr>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>8:00-8:25am</td>
+            <td>8:00-8:25am</td>
+            <th>9:00-9:25am</th>
+            <td>8:00-8:25am</td>
+            <td>8:00-8:25am</td>
+        </tr>
+        <tr>
+            <td>9:25-9:50am</td>
+            <td>9:25-9:50am</td>
+            <th>N/A</th>
+            <td>9:25-9:50am</td>
+            <td>9:25-9:50am</td>
+        </tr>
+        <tr>
+            <td>12:05-12:55pm</td>
+            <td>12:05-12:55pm</td>
+            <th>11:35-12:25pm</th>
+            <td>12:05-12:55pm</td>
+            <td>12:05-12:55pm</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+
+<em><p style="font-weight: inherit;color: white; ">By Dominic Pi-Sunyer</p></em>
+
+</body>
+</html>
