@@ -56,128 +56,153 @@
     <title>SHP Times</title>
 </head>
 
-<body style="background-color: black">
+<center>
 
-<em><p style="font-family: Verdana; color: white;font-size: small">Note, times may change slightly and dosent show after school times beause the times are not set</p></em>
+    <body style="background-color: black">
 
-<h1 style="font-family:verdana;color: #930123">SHP Times</h1>
+    <em><p style="font-family: Verdana; color: white;font-size: small">Note, times may change slightly and dosent show after school times beause the times are not set</p></em>
 
-<p style="color: white">The cafe is...</p>
+    <h1 style="font-family:verdana;color: #930123">SHP Times</h1>
 
-<div id="statusMessage" style="color: #930123;font-family:verdana;font-size: xx-large;font-weight: bolder"></div>
+    <p style="color: white">The cafe is...</p>
 
-<script>
-    function checkStatus() {
-        var currentTime = new Date();
-        var currentHour = currentTime.getUTCHours() - 7; // make pst
-        var currentDay = currentTime.getUTCDay();
+    <div id="statusMessage" style="color: #930123;font-family:verdana;font-size: xx-large;font-weight: bolder"></div>
 
-        // nor times
-        var openingHours = [
-            { start: 8, end: 8, minuteStart: 0, minuteEnd: 25 },
-            { start: 9, end: 9, minuteStart: 25, minuteEnd: 50 },
-            { start: 12, end: 12, minuteStart: 5, minuteEnd: 55 }
-        ];
-        //wed times
-        if (currentDay === 3) {
-            openingHours = [
-                { start: 9, end: 9, minuteStart: 0, minuteEnd: 25 },
-                { start: 11, end: 12, minuteStart: 35, minuteEnd: 25 }
+    <script>
+        function checkStatus() {
+            var currentTime = new Date();
+            var currentHour = currentTime.getUTCHours() - 7; // make pst
+            var currentDay = currentTime.getUTCDay();
+
+            // nor times
+            var openingHours = [
+                { start: 8, end: 8, minuteStart: 0, minuteEnd: 25 },
+                { start: 9, end: 9, minuteStart: 25, minuteEnd: 50 },
+                { start: 12, end: 12, minuteStart: 5, minuteEnd: 55 }
             ];
+            //wed times
+            if (currentDay === 3) {
+                openingHours = [
+                    { start: 9, end: 9, minuteStart: 0, minuteEnd: 25 },
+                    { start: 11, end: 12, minuteStart: 35, minuteEnd: 25 }
+                ];
+            }
+
+            var isOpen = openingHours.some(function (timeRange) {
+                return (
+                    currentHour == timeRange.start &&
+                    currentTime.getUTCMinutes() >= timeRange.minuteStart &&
+                    (currentHour < timeRange.end || (currentHour == timeRange.end && currentTime.getUTCMinutes() <= timeRange.minuteEnd))
+                );
+            });
+
+            // disp status message
+            var statusMessage = document.getElementById("statusMessage");
+            if (isOpen) {
+                statusMessage.textContent = "Open";
+            } else {
+                statusMessage.textContent = "Closed";
+            }
         }
+        checkStatus();
 
-        var isOpen = openingHours.some(function (timeRange) {
-            return (
-                currentHour == timeRange.start &&
-                currentTime.getUTCMinutes() >= timeRange.minuteStart &&
-                (currentHour < timeRange.end || (currentHour == timeRange.end && currentTime.getUTCMinutes() <= timeRange.minuteEnd))
-            );
-        });
+        setInterval(checkStatus, 60000);
+    </script>
 
-        // disp status message
-        var statusMessage = document.getElementById("statusMessage");
-        if (isOpen) {
-            statusMessage.textContent = "Open";
-        } else {
-            statusMessage.textContent = "Closed";
+    <button onclick="bellsfun()" class="button button1" style="font-family: Verdana">Bell Schedule</button>
+    <script>
+        function bellsfun() {
+            var x = document.getElementById("bells");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
         }
-    }
+    </script>
 
-    checkStatus();
+    <div id="bells" class="hidden">
+        <iframe src="http://cs.shschools.org/" width="65%" height="450" style="border:1px solid black;">
+        </iframe>
+    </div>
 
-    setInterval(checkStatus, 60000);
-</script>
-
-<button onclick="bellsfun()" class="button button1" style="font-family: Verdana">Bell Schedule</button>
-<script>
-    function bellsfun() {
-        var x = document.getElementById("bells");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
+    <button onclick="myFunction()" class="button button1" style="font-family: Verdana">Cafe Times</button>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
         }
-    }
-</script>
+    </script>
 
-<div id="bells" class="hidden">
-    <iframe src="http://cs.shschools.org/" width="65%" height="450" style="border:1px solid black;">
-    </iframe>
-</div>
-
-<button onclick="myFunction()" class="button button1" style="font-family: Verdana">Cafe Times</button>
-<script>
-    function myFunction() {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
+    <button onclick="busTimesfun()" class="button button1" style="font-family: Verdana">Bus Times</button>
+    <script>
+        function busTimesfun() {
+            var x = document.getElementById("busTimes");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
         }
-    }
-</script>
-
-<div id="myDIV" class="hidden">
-    <table class="GeneratedTable">
-        <thead>
-        <tr>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>8:00-8:25am</td>
-            <td>8:00-8:25am</td>
-            <th>9:00-9:25am</th>
-            <td>8:00-8:25am</td>
-            <td>8:00-8:25am</td>
-        </tr>
-        <tr>
-            <td>9:25-9:50am</td>
-            <td>9:25-9:50am</td>
-            <th>N/A</th>
-            <td>9:25-9:50am</td>
-            <td>9:25-9:50am</td>
-        </tr>
-        <tr>
-            <td>12:05-12:55pm</td>
-            <td>12:05-12:55pm</td>
-            <th>11:35-12:25pm</th>
-            <td>12:05-12:55pm</td>
-            <td>12:05-12:55pm</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<br>
+    </script>
 
 
-<em><p style="font-weight: inherit;color: white; ">By Dominic Pi-Sunyer</p></em>
+    <div id="myDIV" class="hidden">
+        <table class="GeneratedTable">
+            <thead>
+            <tr>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>8:00-8:25am</td>
+                <td>8:00-8:25am</td>
+                <th>9:00-9:25am</th>
+                <td>8:00-8:25am</td>
+                <td>8:00-8:25am</td>
+            </tr>
+            <tr>
+                <td>9:25-9:50am</td>
+                <td>9:25-9:50am</td>
+                <th>N/A</th>
+                <td>9:25-9:50am</td>
+                <td>9:25-9:50am</td>
+            </tr>
+            <tr>
+                <td>12:05-12:55pm</td>
+                <td>12:05-12:55pm</td>
+                <th>11:35-12:25pm</th>
+                <td>12:05-12:55pm</td>
+                <td>12:05-12:55pm</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-</body>
+    <div id="busTimes" class="hidden">
+
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vSHLxgbsUPHiMc88Rw3-hp2Tbd1sznBkmtxT1b40TA0moCXPvFAG2IkunNy-cVvReCDHcZt61SlPxsX/pub?urp=gmail_link" width="75%" height="650" style="border:1px solid black;" ></iframe>
+
+    </div>
+
+    <br>
+
+    <em><p style="font-weight: inherit;color: white;font-family: Verdana">By Dominic Pi-Sunyer</p></em>
+
+    <a href="https://github.com/Dominic-Pi-Sunyer/SHP-Times2/tree/main">
+
+        <p style="font-weight: inherit;font-family: Verdana">GitHub</p>
+
+    </a>
+    </body>
+</center>
 </html>
