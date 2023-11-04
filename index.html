@@ -203,6 +203,55 @@
 
     </div>
     <br>
+
+    <label style="font-weight: inherit;color: white;font-family: Verdana">What should I add?</label>
+
+    <br>
+    <div>
+        <!--Add few elements to the form-->
+        <div><input type="text" id="txtEmail" placeholder="Enter your email address" /></div>
+        <div>
+            <textarea id="msg" name="msg" placeholder="Write some message ..." style="height:100px"></textarea>
+        </div>
+
+        <!--Add a button to save the data.-->
+        <div>
+            <input type="button" id="bt" value="Send!" onclick="saveFile()" />
+        </div>
+    </div>
+    <script>
+        let saveFile = () => {
+
+            // Get the data from each element on the form.
+            const email = document.getElementById('txtEmail');
+            const msg = document.getElementById('msg');
+
+            // This variable stores all the data.
+            let data =
+                'Email: ' + email.value + ' \r\n ' +
+                'Message: ' + msg.value;
+
+            // Convert the text to BLOB.
+            const textToBLOB = new Blob([data], { type: 'text/plain' });
+            const sFileName = 'formData.txt';	   // The file to save the data.
+
+            let newLink = document.createElement("a");
+            newLink.download = sFileName;
+
+            if (window.webkitURL != null) {
+                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+            }
+            else {
+                newLink.href = window.URL.createObjectURL(textToBLOB);
+                newLink.style.display = "none";
+                document.body.appendChild(newLink);
+            }
+
+            newLink.click();
+        }
+    </script>
+    <br>
+
     <em><p style="font-weight: inherit;color: white;font-family: Verdana">By Dominic Pi-Sunyer</p></em>
 
     <a href="https://github.com/Dominic-Pi-Sunyer/SHP-Times2/tree/main">
