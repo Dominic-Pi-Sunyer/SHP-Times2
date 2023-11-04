@@ -121,14 +121,19 @@
         }
     </script>
 
-    <div id="bells" class="hidden">
-        <iframe src="http://cs.shschools.org/" width="65%" height="450" style="border:1px solid black;">
-        </iframe>
-        <a href="http://cs.shschools.org/">
 
-            <p style="font-weight: inherit;font-family: Verdana">Full Page</p>
-        </a>
-    </div>
+    <button onclick="sjustfun()" class="button button1" style="font-family: Verdana">Segustions</button>
+    <script>
+        function sjustfun() {
+            var x = document.getElementById("sugetions");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
 
     <button onclick="myFunction()" class="button button1" style="font-family: Verdana">Cafe Times</button>
     <script>
@@ -153,6 +158,85 @@
             }
         }
     </script>
+
+
+    <button onclick="settingfun()" class="button button1" style="font-family: Verdana">Settings</button>
+    <script>
+        function settingfun() {
+            var x = document.getElementById("settings");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+<div id="settings" class="hidden">
+
+    <label style="font-weight: inherit;color: white;font-family: Verdana">Theme</label>
+
+</div>
+
+    <div id="sugetions" class="hidden">
+
+    <label style="font-weight: inherit;color: white;font-family: Verdana">What should I add?</label>
+
+    <br>
+    <div>
+        <!--Add few elements to the form-->
+        <div><input type="text" id="txtEmail" placeholder="Enter your email address" /></div>
+        <div>
+            <textarea id="msg" name="msg" placeholder="Write some message ..." style="height:100px"></textarea>
+        </div>
+
+        <!--Add a button to save the data.-->
+        <div>
+            <input type="button" id="bt" value="Send!" onclick="saveFile()" />
+        </div>
+    </div>
+    <script>
+        let saveFile = () => {
+
+            // Get the data from each element on the form.
+            const email = document.getElementById('txtEmail');
+            const msg = document.getElementById('msg');
+
+            // This variable stores all the data.
+            let data =
+                'Email: ' + email.value + ' \r\n ' +
+                'Message: ' + msg.value;
+
+            // Convert the text to BLOB.
+            const textToBLOB = new Blob([data], { type: 'text/plain' });
+            const sFileName = 'formData.txt';	   // The file to save the data.
+
+            let newLink = document.createElement("a");
+            newLink.download = sFileName;
+
+            if (window.webkitURL != null) {
+                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+            }
+            else {
+                newLink.href = window.URL.createObjectURL(textToBLOB);
+                newLink.style.display = "none";
+                document.body.appendChild(newLink);
+            }
+
+            newLink.click();
+        }
+    </script>
+
+</div>
+
+    <div id="bells" class="hidden">
+        <iframe src="http://cs.shschools.org/" width="65%" height="450" style="border:1px solid black;">
+        </iframe>
+        <a href="http://cs.shschools.org/">
+
+            <p style="font-weight: inherit;font-family: Verdana">Full Page</p>
+        </a>
+    </div>
 
 
     <div id="myDIV" class="hidden">
@@ -204,52 +288,7 @@
     </div>
     <br>
 
-    <label style="font-weight: inherit;color: white;font-family: Verdana">What should I add?</label>
 
-    <br>
-    <div>
-        <!--Add few elements to the form-->
-        <div><input type="text" id="txtEmail" placeholder="Enter your email address" /></div>
-        <div>
-            <textarea id="msg" name="msg" placeholder="Write some message ..." style="height:100px"></textarea>
-        </div>
-
-        <!--Add a button to save the data.-->
-        <div>
-            <input type="button" id="bt" value="Send!" onclick="saveFile()" />
-        </div>
-    </div>
-    <script>
-        let saveFile = () => {
-
-            // Get the data from each element on the form.
-            const email = document.getElementById('txtEmail');
-            const msg = document.getElementById('msg');
-
-            // This variable stores all the data.
-            let data =
-                'Email: ' + email.value + ' \r\n ' +
-                'Message: ' + msg.value;
-
-            // Convert the text to BLOB.
-            const textToBLOB = new Blob([data], { type: 'text/plain' });
-            const sFileName = 'formData.txt';	   // The file to save the data.
-
-            let newLink = document.createElement("a");
-            newLink.download = sFileName;
-
-            if (window.webkitURL != null) {
-                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-            }
-            else {
-                newLink.href = window.URL.createObjectURL(textToBLOB);
-                newLink.style.display = "none";
-                document.body.appendChild(newLink);
-            }
-
-            newLink.click();
-        }
-    </script>
     <br>
 
     <em><p style="font-weight: inherit;color: white;font-family: Verdana">By Dominic Pi-Sunyer</p></em>
