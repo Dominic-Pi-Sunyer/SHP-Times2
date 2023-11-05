@@ -2,7 +2,6 @@ function checkStatus() {
     var currentTime = new Date();
     var currentHour = currentTime.getUTCHours() - 7; // make pst
     var currentDay = currentTime.getUTCDay();
-
     // nor times
     var openingHours = [
         { start: 8, end: 8, minuteStart: 0, minuteEnd: 25 },
@@ -16,7 +15,6 @@ function checkStatus() {
             { start: 11, end: 12, minuteStart: 35, minuteEnd: 25 }
         ];
     }
-
     var isOpen = openingHours.some(function (timeRange) {
         return (
             currentHour == timeRange.start &&
@@ -24,7 +22,6 @@ function checkStatus() {
             (currentHour < timeRange.end || (currentHour == timeRange.end && currentTime.getUTCMinutes() <= timeRange.minuteEnd))
         );
     });
-
     // disp status message
     var statusMessage = document.getElementById("statusMessage");
     if (isOpen) {
@@ -34,9 +31,7 @@ function checkStatus() {
     }
 }
 checkStatus();
-
 setInterval(checkStatus, 60000);
-
 function bellsfun() {
     var x = document.getElementById("bells");
     if (x.style.display === "none") {
@@ -115,4 +110,3 @@ var savedDarkMode = getCookie("darkMode");
 if (savedDarkMode === "true") {
     document.body.classList.add("dark-mode");
 }
-

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,18 +12,15 @@
             border-style: solid;
             color: #ffffff;
         }
-
         table.GeneratedTable td, table.GeneratedTable th {
             border-width: 2px;
             border-color: #ffffff;
             border-style: solid;
             padding: 3px;
         }
-
         table.GeneratedTable thead {
             background-color: #000000;
         }
-
         .button {
             border: none;
             color: white;
@@ -37,18 +33,15 @@
             transition-duration: 0.4s;
             cursor: pointer;
         }
-
         .button1 {
             background-color: white;
             color: black;
             border: 2px solid #ffffff;
         }
-
         .button1:hover {
             background-color: #930123;
             color: white;
         }
-
         .hidden {
             display: none;
         }
@@ -62,47 +55,35 @@
     </style>
     <title>SHP Times</title>
 </head>
-
 <center>
-
     <body class="dark-mode">
-    <script src="index.js"></script>
-    <em><p style="font-family: Verdana;font-size: small">Note, times may change slightly and dosent show after school times beause the times are not set</p></em>
 
+    <script src="index.js"></script>
+
+    <em><p style="font-family: Verdana;font-size: small">Note, times may change slightly and dosent show after school times beause the times are not set</p></em>
     <h1 style="font-family:verdana;color: #930123">SHP Times</h1>
 
     <p style="font-family: Verdana;font-weight: bolder">The cafe is...</p>
-
+    <!--buttons-->
     <div id="statusMessage" style="color: #930123;font-family:verdana;font-size: xx-large;font-weight: bolder"></div>
     <button onclick="bellsfun()" class="button button1" style="font-family: Verdana">Bell Schedule</button>
     <button onclick="myFunction()" class="button button1" style="font-family: Verdana">Cafe Times</button>
     <button onclick="busTimesfun()" class="button button1" style="font-family: Verdana">Bus Times</button>
     <button onclick="settingfun()" class="button button1" style="font-family: Verdana">Settings</button>
-<div id="settings" class="hidden">
+    <div id="settings" class="hidden">
 
 
 
+        <button onclick="toggleDarkMode()" style="background-color: #930123">Toggle Theme</button>
 
-    <button onclick="toggleDarkMode()" style="background-color: #930123">Toggle Theme</button>
-
-</div>
-
-    <div id="sugetions" class="hidden">
-
-    <label style="font-weight: inherit;color: white;font-family: Verdana">What should I add?</label>
-
-    <br>
-
+    </div>
     <div id="bells" class="hidden">
         <iframe src="http://cs.shschools.org/" width="65%" height="450" style="border:1px solid black;">
         </iframe>
         <a href="http://cs.shschools.org/">
-
             <p style="font-weight: inherit;font-family: Verdana">Full Page</p>
         </a>
     </div>
-
-
     <div id="myDIV" class="hidden">
         <table class="GeneratedTable">
             <thead>
@@ -139,26 +120,16 @@
             </tbody>
         </table>
     </div>
-
     <div id="busTimes" class="hidden">
-
         <iframe src="https://docs.google.com/document/d/e/2PACX-1vSHLxgbsUPHiMc88Rw3-hp2Tbd1sznBkmtxT1b40TA0moCXPvFAG2IkunNy-cVvReCDHcZt61SlPxsX/pub?urp=gmail_link" width="75%" height="650" style="border:1px solid black;" ></iframe>
-
         <a href="https://docs.google.com/document/d/e/2PACX-1vSHLxgbsUPHiMc88Rw3-hp2Tbd1sznBkmtxT1b40TA0moCXPvFAG2IkunNy-cVvReCDHcZt61SlPxsX/pub?urp=gmail_link">
-
             <p style="font-weight: inherit;font-family: Verdana">Full doc</p>
         </a>
-
     </div>
     <br>
-
-
     <br>
-
     <em><p id="name" style="font-weight: inherit;font-family: Verdana">By Dominic Pi-Sunyer</p></em>
-
     <a href="https://github.com/Dominic-Pi-Sunyer/SHP-Times2/tree/main">
-
         <p style="font-weight: inherit;font-family: Verdana">GitHub</p>
     </a>
     </body>
