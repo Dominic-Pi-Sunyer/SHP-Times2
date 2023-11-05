@@ -55,7 +55,9 @@
         .dark-mode {
             background-color: black;
             color: white;
-
+        }
+        body {
+            transition: background-color 0.5s, color 0.5s;
         }
     </style>
     <title>SHP Times</title>
@@ -82,7 +84,7 @@
 
 
 
-    <button onclick="darkMode()" style="background-color: #930123">Toogle Theme</button>
+    <button onclick="toggleDarkMode()" style="background-color: #930123">Toggle Theme</button>
 
 </div>
 

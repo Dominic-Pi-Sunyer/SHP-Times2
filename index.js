@@ -77,10 +77,45 @@ function settingfun() {
         x.style.display = "none";
     }
 }
-function darkMode() {
+//dark mode toogle
+function toggleDarkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+
+    // Save user preference to a cookie
+    var isDarkMode = element.classList.contains("dark-mode");
+    setCookie("darkMode", isDarkMode.toString(), 365);
 }
+
+//save as cookie
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+//get cokie vaule
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+//find saved vaule
+var savedDarkMode = getCookie("darkMode");
+if (savedDarkMode === "true") {
+    document.body.classList.add("dark-mode");
+}
+
 let saveFile = () => {
 
     // Get the data from each element on the form.
@@ -110,3 +145,4 @@ let saveFile = () => {
 
     newLink.click();
 }
+document.cookie = "mode=darkOn"
